@@ -71,8 +71,10 @@ class UrlController extends Controller
         }
     }
 
-    public function redirect(Url $url)
+    public function redirect($shortUrl)
     {
+        $url = Url::where('short_url', $shortUrl)->first();
+        
         if (!$url) {
             return response()->json([
                 'status' => 'error',
