@@ -82,6 +82,6 @@ class UrlController extends Controller
 
         $url->increment('visit_count'); // Increment visit count (new in V2)
 
-        return redirect()->away($url->short_url);
+        return redirect()->away($url->original_url);
     }
 }
