@@ -18,7 +18,10 @@ class UrlController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'data' => UrlResource::collection($urls),
+            'data' => [
+                'total' => $urls->count(),
+                'urls' => UrlResource::collection($urls)
+            ],
             'message' => 'URLs have been retrieved successfully.'
         ], 200);
     }
@@ -77,6 +80,6 @@ class UrlController extends Controller
             ], 404);
         }
 
-        return redirect()->away($url->short_url);
+        return redirect()->away($url->original_url);
     }
 }
