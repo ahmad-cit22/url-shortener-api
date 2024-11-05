@@ -48,6 +48,8 @@ class AuthController extends Controller
         }
 
         $user = $request->user();
+        $user->tokens()->delete();
+
         $token = $user->createToken('API Token')->plainTextToken;
 
         return response()->json([
@@ -68,7 +70,7 @@ class AuthController extends Controller
                 'message' => 'No authenticated user found.',
             ], 401);
         }
-        
+
         $token = $request->user()->currentAccessToken();
 
         if ($token) {
