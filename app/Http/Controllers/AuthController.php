@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -35,15 +36,15 @@ class AuthController extends Controller
         }
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
+        $credentials = $request->validated();
 
         if (!Auth::attempt($credentials)) {
-            return response()->json(['message' => 'Invalid credentials'], 401);
+            return response()->json([
+                'status' => 'error',
+                'message' => 'The provided credentials are incorrect.'
+            ], 401);
         }
 
         $user = $request->user();
@@ -51,8 +52,21 @@ class AuthController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'data' => new UserResource($user),
+            'data' => [
+                'user' => new UserResource($user),
+                'token' => $token,
+            ],
             'message' => 'Login successful.'
+        ], 200);
+    }
+
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Logout successful.'
         ], 200);
     }
 }
