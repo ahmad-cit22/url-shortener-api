@@ -17,9 +17,9 @@ A simple yet powerful URL shortening API built with Laravel 11. This API allows 
 - **API Versioning** (v1 and v2)
 - Secure, clean, and well-structured API with response messages
 
-## API Endpoints
+## 📝 API Endpoints (v1 and v2)
 
-### Authentication Endpoints
+### 🔒 Authentication Endpoints 
 - `POST /api/v1/register`: Register a new user
 - `POST /api/v1/login`: User login
 - `POST /api/v1/logout`: User logout
@@ -28,7 +28,7 @@ A simple yet powerful URL shortening API built with Laravel 11. This API allows 
 - `POST /api/v2/login`: User login
 - `POST /api/v2/logout`: User logout
 
-### URL Endpoints
+### 🌐 URL Endpoints 
 - `POST /api/v1/shorten`: Shorten a URL
 - `GET /api/v1/urls`: List all shortened URLs
 - `GET /v1/{short_url}`: Redirect to the original URL from the shortened link
@@ -37,11 +37,11 @@ A simple yet powerful URL shortening API built with Laravel 11. This API allows 
 - `GET /api/v2/urls`: List all shortened URLs
 - `GET /v2/{short_url}`: Redirect to the original URL from the shortened link & counts visit
 
-### API Responses
+### 📝 API Responses 
 - Success response: HTTP 200 or 201 with status `success` and relevant data
 - Error response: HTTP 400, 401, 404, or 500 with status `error` and relevant error message
 
-## Detailed API Documentation
+## 📚 Detailed API Documentation 
 
 Detailed API documentation is available at the `/docs/api` route, which was generated using **Scramble**. Visit this route in your browser to view the full documentation, including request and response examples.
 
@@ -115,9 +115,9 @@ To run this project, you need to have the following installed:
 
 ---
 
-## Usage
+## 🚀 Usage 
 
-### Authentication
+### 🔒 Authentication
 
 To access most endpoints, users must authenticate via Personal Access Tokens using [Sanctum](https://laravel.com/docs/sanctum).
 
@@ -126,7 +126,7 @@ To access most endpoints, users must authenticate via Personal Access Tokens usi
 3. **Use the Token**: Include the token in the `Authorization` header as `Bearer {token}` for subsequent requests like shortening URLs, retrieving shortened URLs, logging out, etc.
 
 
-### Shorten URL
+### 🔗 Shorten URL
 
 To shorten a URL, send a POST request to `/api/v1/shorten` with the following payload:
 
@@ -138,7 +138,7 @@ To shorten a URL, send a POST request to `/api/v1/shorten` with the following pa
 
 This will return the shortened URL along with the original URL & the visit count.
 
-### Redirect to Original URL
+### 🔄 Redirect to Original URL
 
 To redirect to the original URL, simply send a GET request to the shortened URL (authentication not required) like so: `GET /v1/{short_url}`.
 
