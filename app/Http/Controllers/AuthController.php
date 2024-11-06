@@ -71,11 +71,9 @@ class AuthController extends Controller
             ], 401);
         }
 
-        $token = $request->user()->currentAccessToken();
-
-        if ($token) {
+        $request->user()->tokens->each(function ($token) {
             $token->delete();
-        }
+        });
 
         return response()->json([
             'status' => 'success',

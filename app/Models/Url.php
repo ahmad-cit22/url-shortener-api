@@ -2,17 +2,26 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Url extends Model
 {
+    /** @use HasFactory<\Database\Factories\UrlFactory> */
+    use HasFactory;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'user_id',
         'original_url',
         'short_url',
         'visit_count'
     ];
-    
+
     /**
      * The attributes that should be cast to native types.
      *
