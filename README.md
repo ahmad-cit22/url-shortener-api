@@ -112,7 +112,6 @@ To run this project, you need to have the following installed:
    ```
 
    The application will now be running at `http://localhost:8000`.
-   ```
 
 ---
 
@@ -141,13 +140,9 @@ This will return the shortened URL along with the original URL & the visit count
 
 ### Redirect to Original URL
 
-To redirect to the original URL, simply send a GET request to the shortened URL (authentication not required) like so:
+To redirect to the original URL, simply send a GET request to the shortened URL (authentication not required) like so: `GET /v1/{short_url}`.
 
-```bash
-GET /v1/{short_url}
-```
-
-You will be redirected to the original URL.
+Then you will be redirected to the original URL.
 
 ---
 
