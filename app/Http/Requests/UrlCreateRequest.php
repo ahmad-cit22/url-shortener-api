@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UrlCreateRequest extends FormRequest
 {
@@ -32,5 +34,16 @@ class UrlCreateRequest extends FormRequest
             'original_url.required' => 'Please enter a URL.',
             'original_url.url' => 'Please enter a valid URL.',
         ];
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(
+            response()->json([
+                'status' => 'error',
+                'message' => 'Validation failed.',
+                'errors' => $validator->errors(),
+            ], 422)
+        );
     }
 }

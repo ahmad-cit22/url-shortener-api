@@ -187,8 +187,6 @@ php artisan test
 ```
 ---
 
-
-
 ## 📝 Conclusion
 This project demostrates an effiecient URL shortening API built with Laravel 11, adhering to the best practices of software development. The application is optimized for performance and can be expanded with additional features and analytics capabilities.
 
