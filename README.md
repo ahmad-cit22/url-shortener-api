@@ -170,14 +170,24 @@ This project includes various tests to ensure the correct & smooth functionality
 ### 2. UrlV1Test
 - **File:** `tests/Feature/UrlV1Test.php`
   - **test_user_can_shorten_url_v1:** Tests the URL shortening functionality for version 1.
-  - **test_user_can_list_urls_v1:** Ensures that users can list all shortened URLs in version 1.
+  - **test_user_cannot_shorten_invalid_url_v1:** Verifies that users cannot shorten an invalid URL in version 1.
+  - **test_user_cannot_shorten_duplicate_url_v1:** Ensures that users receive a message when trying to shorten a duplicate URL in version 1.
+  - **test_user_cannot_shorten_url_without_auth_v1:** Verifies that users cannot shorten a URL without authentication in version 1.
+  - **test_user_can_list_urls_v1:** Ensures that authenticated users can list all shortened URLs in version 1.
+  - **test_user_cannot_list_urls_without_auth_v1:** Verifies that users cannot list URLs without authentication in version 1.
   - **test_user_can_redirect_v1:** Verifies that users can redirect to the original URL using version 1 shortened links.
+  - **test_user_cannot_redirect_to_non_existent_url_v1:** Ensures that a 404 error is returned when redirecting to a non-existent URL in version 1.
 
 ### 3. UrlV2Test
 - **File:** `tests/Feature/UrlV2Test.php`
   - **test_user_can_shorten_url_v2:** Tests the URL shortening functionality for version 2.
-  - **test_user_can_list_urls_v2:** Ensures that users can list all shortened URLs in version 2.
-  - **test_user_can_redirect_and_count_visits_v2:** Verifies that users can redirect to the original URL and that visit counts are tracked in version 2.
+  - **test_user_cannot_shorten_invalid_url_v2:** Verifies that users cannot shorten an invalid URL in version 2.
+  - **test_user_cannot_shorten_duplicate_url_v2:** Ensures that users receive a message when trying to shorten a duplicate URL in version 2.
+  - **test_user_cannot_shorten_url_without_auth_v2:** Verifies that users cannot shorten a URL without authentication in version 2.
+  - **test_user_can_list_urls_v2:** Ensures that authenticated users can list all their shortened URLs in version 2.
+  - **test_user_cannot_list_urls_without_auth_v2:** Verifies that users cannot list URLs without authentication in version 2.
+  - **test_user_can_redirect_and_count_visits_v2:** Tests redirection to the original URL and visit count increment in version 2.
+  - **test_user_cannot_redirect_to_non_existent_url_v2:** Ensures that a 404 error is returned when redirecting to a non-existent URL in version 2.
 
 ### Running Tests
 To run the provided tests, you can use the following command:
@@ -185,6 +195,7 @@ To run the provided tests, you can use the following command:
 ```bash
 php artisan test
 ```
+
 ---
 
 ## 📝 Conclusion
