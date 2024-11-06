@@ -8,6 +8,7 @@ use Tests\TestCase;
 
 class UrlV2Test extends TestCase
 {
+
     public function test_user_can_shorten_url_v2()
     {
         $user = User::factory()->create();

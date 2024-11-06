@@ -67,7 +67,7 @@ class AuthController extends Controller
         if (!$request->user()) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'No authenticated user found.',
+                'message' => 'No authenticated user found.'
             ], 401);
         }
 

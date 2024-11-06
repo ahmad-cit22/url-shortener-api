@@ -1,66 +1,192 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🔗 URL Shortening API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![APP Screenshot](images/project-screenshot.png)
 
-## About Laravel
+A simple yet powerful URL shortening API built with Laravel 11. This API allows users to shorten URLs, retrieve shortened URLs, perform redirections, and track visit statistics (V2). It also includes authentication using **Sanctum** for secure user access.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ✨ Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **User Authentication** (via Laravel Sanctum)
+	+ User registration, login, and logout
+- **URL Shortening**
+	+ Shorten long URLs
+	+ Retrieve the URLs shortened by a user
+- **URL Redirection**
+	+ Redirect users to the original URL using a short link
+- **URL Visit Counting** (available in v2 of the API)
+- **API Versioning** (v1 and v2)
+- Secure, clean, and well-structured API with response messages
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## API Endpoints
 
-## Learning Laravel
+### Authentication Endpoints
+- `POST /api/v1/register`: Register a new user
+- `POST /api/v1/login`: User login
+- `POST /api/v1/logout`: User logout
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- `POST /api/v2/register`: Register a new user
+- `POST /api/v2/login`: User login
+- `POST /api/v2/logout`: User logout
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### URL Endpoints
+- `POST /api/v1/shorten`: Shorten a URL
+- `GET /api/v1/urls`: List all shortened URLs
+- `GET /v1/{short_url}`: Redirect to the original URL from the shortened link
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- `POST /api/v2/shorten`: Shorten a URL
+- `GET /api/v2/urls`: List all shortened URLs
+- `GET /v2/{short_url}`: Redirect to the original URL from the shortened link & counts visit
 
-## Laravel Sponsors
+### API Responses
+- Success response: HTTP 200 or 201 with status `success` and relevant data
+- Error response: HTTP 400, 401, 404, or 500 with status `error` and relevant error message
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Detailed API Documentation
 
-### Premium Partners
+Detailed API documentation is available at the `/docs/api` route, which was generated using **Scramble**. Visit this route in your browser to view the full documentation, including request and response examples.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+---
 
-## Contributing
+## 🚀 Getting Started
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 📋 Prerequisites
 
-## Code of Conduct
+To run this project, you need to have the following installed:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- PHP 8.2 or higher
+- Composer
+- Laravel 11
+- MySQL or SQLite (for database)
+- Laravel Sanctum (for authentication)
 
-## Security Vulnerabilities
+### 🔧 Installation Instructions
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. **Clone the Repository**
 
-## License
+   ```bash
+   git clone https://github.com/ahmad-cit22/url-shortener-api.git
+   cd url-shortener-api
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+2. **Install Dependencies**
+
+   Run the following command to install all the project dependencies:
+
+   ```bash
+   composer install
+   ```
+
+3. **Set Up Environment File**
+
+   Copy the example environment file and modify it according to your local setup:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   Then, open the `.env` file and update the following configurations:
+
+   - **Database**: Set up your database credentials (`DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`).
+   - **APP_URL**: Set the app URL to your local development URL, e.g., `http://localhost:8000`.
+
+4. **Generate Application Key**
+
+   ```bash
+   php artisan key:generate
+   ```
+
+5. **Run Migrations**
+
+   Run the following command to create the necessary database tables:
+
+   ```bash
+   php artisan migrate
+   ```
+
+6. **Run the Application**
+
+   Start the Laravel development server by running the command:
+
+   ```bash
+   php artisan serve
+   ```
+
+   The application will now be running at `http://localhost:8000`.
+   ```
+
+---
+
+## Usage
+
+### Authentication
+
+To access most endpoints, users must authenticate via Personal Access Tokens using [Sanctum](https://laravel.com/docs/sanctum).
+
+1. **Register a User**: Send a POST request to `/api/v1/register` to create a new user.
+2. **Log In**: Send a POST request to `/api/v1/login` to receive a token.
+3. **Use the Token**: Include the token in the `Authorization` header as `Bearer {token}` for subsequent requests like shortening URLs, retrieving shortened URLs, logging out, etc.
+
+
+### Shorten URL
+
+To shorten a URL, send a POST request to `/api/v1/shorten` with the following payload:
+
+```json
+{
+    "original_url": "https://example.com"
+}
+```
+
+This will return the shortened URL along with the original URL & the visit count.
+
+### Redirect to Original URL
+
+To redirect to the original URL, simply send a GET request to the shortened URL (authentication not required) like so:
+
+```bash
+GET /v1/{short_url}
+```
+
+You will be redirected to the original URL.
+
+---
+
+## 🧪 Tests
+
+This project includes various tests to ensure the correct & smooth functionality with reliability of the system. The implemented tests are mentioned below:
+
+### 1. AuthTest
+- **File:** `tests/Feature/AuthTest.php`
+  - **test_user_can_register:** Ensures that a user can register successfully.
+  - **test_user_can_login:** Verifies that a registered user can log in.
+  - **test_user_can_logout:** Confirms that a logged-in user can log out.
+
+### 2. UrlV1Test
+- **File:** `tests/Feature/UrlV1Test.php`
+  - **test_user_can_shorten_url_v1:** Tests the URL shortening functionality for version 1.
+  - **test_user_can_list_urls_v1:** Ensures that users can list all shortened URLs in version 1.
+  - **test_user_can_redirect_v1:** Verifies that users can redirect to the original URL using version 1 shortened links.
+
+### 3. UrlV2Test
+- **File:** `tests/Feature/UrlV2Test.php`
+  - **test_user_can_shorten_url_v2:** Tests the URL shortening functionality for version 2.
+  - **test_user_can_list_urls_v2:** Ensures that users can list all shortened URLs in version 2.
+  - **test_user_can_redirect_and_count_visits_v2:** Verifies that users can redirect to the original URL and that visit counts are tracked in version 2.
+
+### Running Tests
+To run the provided tests, you can use the following command:
+
+```bash
+php artisan test
+```
+---
+
+
+
+## 📝 Conclusion
+
+This project demonstrates a basic but efficient URL shortening API built with Laravel 10, following the best practices and designed for scalability. The application is optimized for performance and can be expanded with additional features and analytics capabilities.
+
+Let me know if you have any issues running the application, and feel free to give any suggestions you have!
+
+

@@ -24,6 +24,59 @@ class AuthTest extends TestCase
             ]);
     }
 
+    public function test_user_cannot_register_with_invalid_inputs()
+    {
+        $response = $this->postJson('/api/v1/register', [
+            'name' => 'Test User',
+            'email' => 'invalidEmail',
+            'password' => 'Pa$$w0rd!',
+            'password_confirmation' => 'Pa$$w0rd!'
+        ]);
+
+        $response->assertUnprocessable()
+            ->assertJsonStructure([
+                'status',
+                'message',
+                'errors' => ['email']
+            ]);
+    }
+
+    public function test_user_cannot_register_with_duplicate_email()
+    {
+        User::factory()->create(['email' => 'test@example.com']);
+
+        $response = $this->postJson('/api/v1/register', [
+            'name' => 'Another User',
+            'email' => 'test@example.com',
+            'password' => 'Pa$$w0rd!',
+            'password_confirmation' => 'Pa$$w0rd!'
+        ]);
+
+        $response->assertUnprocessable()
+            ->assertJsonStructure([
+                'status',
+                'message',
+                'errors' => ['email']
+            ]);
+    }
+
+    public function test_user_cannot_register_with_password_confirmation_mismatch()
+    {
+        $response = $this->postJson('/api/v1/register', [
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+            'password' => 'Pa$$w0rd!',
+            'password_confirmation' => 'DifferentPassword!'
+        ]);
+
+        $response->assertUnprocessable()
+            ->assertJsonStructure([
+                'status',
+                'message',
+                'errors' => ['password']
+            ]);
+    }
+
     public function test_user_can_login()
     {
         $user = User::factory()->create(['password' => bcrypt('password')]);
@@ -39,6 +92,38 @@ class AuthTest extends TestCase
                 'data' => ['token', 'user'],
                 'message'
             ]);
+
+        $response->assertJsonFragment(['status' => 'success']);
+        $this->assertNotNull($response->json('data.token'));
+    }
+
+    public function test_user_cannot_login_with_invalid_credentials()
+    {
+        $response = $this->postJson('/api/v1/login', [
+            'email' => 'invalid',
+            'password' => 'invalid'
+        ]);
+
+        $response->assertUnauthorized()
+            ->assertJsonStructure([
+                'status',
+                'message'
+            ]);
+    }
+
+    public function test_user_cannot_login_with_missing_credentials()
+    {
+        $response = $this->postJson('/api/v1/login', [
+            'email' => '',
+            'password' => ''
+        ]);
+
+        $response->assertUnauthorized()
+            ->assertJsonStructure([
+                'status',
+                'message',
+                'errors' => ['email', 'password']
+            ]);
     }
 
     public function test_user_can_logout()
@@ -51,6 +136,16 @@ class AuthTest extends TestCase
             ->assertJson([
                 'status' => 'success',
                 'message' => 'Logout successful.'
+            ]);
+    }
+
+    public function test_user_cannot_logout_without_token()
+    {
+        $response = $this->postJson('/api/v1/logout');
+
+        $response->assertUnauthorized()
+            ->assertJson([
+                'message' => 'Unauthenticated.'
             ]);
     }
 }
