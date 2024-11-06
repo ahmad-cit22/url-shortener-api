@@ -158,8 +158,14 @@ This project includes various tests to ensure the correct & smooth functionality
 ### 1. AuthTest
 - **File:** `tests/Feature/AuthTest.php`
   - **test_user_can_register:** Ensures that a user can register successfully.
-  - **test_user_can_login:** Verifies that a registered user can log in.
-  - **test_user_can_logout:** Confirms that a logged-in user can log out.
+  - **test_user_cannot_register_with_invalid_inputs:** Verifies that a user cannot register with invalid inputs.
+  - **test_user_cannot_register_with_duplicate_email:** Confirms that a user cannot register with a duplicate email.
+  - **test_user_cannot_register_with_password_confirmation_mismatch:** Checks that a user cannot register with a mismatched password confirmation.
+  - **test_user_can_login:** Ensures that a registered user can log in.
+  - **test_user_cannot_login_with_invalid_credentials:** Verifies that a user cannot log in with invalid credentials.
+  - **test_user_cannot_login_with_missing_credentials:** Confirms that a user cannot log in with missing credentials.
+  - **test_user_can_logout:** Ensures that a logged-in user can log out.
+  - **test_user_cannot_logout_without_token:** Verifies that a user cannot log out without a valid token.
 
 ### 2. UrlV1Test
 - **File:** `tests/Feature/UrlV1Test.php`
@@ -184,9 +190,8 @@ php artisan test
 
 
 ## 📝 Conclusion
+This project demostrates an effiecient URL shortening API built with Laravel 11, adhering to the best practices of software development. The application is optimized for performance and can be expanded with additional features and analytics capabilities.
 
-This project demonstrates a basic but efficient URL shortening API built with Laravel 10, following the best practices and designed for scalability. The application is optimized for performance and can be expanded with additional features and analytics capabilities.
-
-Let me know if you have any issues running the application, and feel free to give any suggestions you have!
+If you have any issues running the application or have suggestions for improvement, please don't hesitate to reach out. I'm always looking for ways to enhance the project and make it more valuable to users.
 
 
