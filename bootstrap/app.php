@@ -23,11 +23,11 @@ return Application::configure(basePath: dirname(__DIR__))
                     return response()->json([
                         'message' => 'Record not found.'
                     ], 404);
-                } else {
-                    return response()->json([
-                        'message' => $e->getMessage()
-                    ], 400);
                 }
+
+                return response()->json([
+                    'message' => $e->getMessage()
+                ], 400);
             }
         });
     })->create();
